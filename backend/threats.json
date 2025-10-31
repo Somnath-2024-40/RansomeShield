@@ -1,0 +1,137 @@
+[
+  {
+    "id": 15,
+    "time": "2025-10-31T23:37:04.987881",
+    "file": "D:\\test_ransomware\\file4.wannacry",
+    "reason": "Ransomware extension: .wannacry",
+    "risk": "CRITICAL",
+    "score": 0.95,
+    "backup": "backups\\file4_20251031_233704.wannacry"
+  },
+  {
+    "id": 14,
+    "time": "2025-10-31T23:36:53.015604",
+    "file": "D:\\test_ransomware\\file3.crypto",
+    "reason": "Ransomware extension: .crypto",
+    "risk": "CRITICAL",
+    "score": 0.95,
+    "backup": "backups\\file3_20251031_233653.crypto"
+  },
+  {
+    "id": 13,
+    "time": "2025-10-31T23:36:41.323621",
+    "file": "D:\\test_ransomware\\file2.locked",
+    "reason": "Ransomware extension: .locked",
+    "risk": "CRITICAL",
+    "score": 0.95,
+    "backup": "backups\\file2_20251031_233641.locked"
+  },
+  {
+    "id": 12,
+    "time": "2025-10-31T23:36:29.795835",
+    "file": "D:\\test_ransomware\\file1.encrypted",
+    "reason": "Ransomware extension: .encrypted",
+    "risk": "CRITICAL",
+    "score": 0.95,
+    "backup": "backups\\file1_20251031_233629.encrypted"
+  },
+  {
+    "id": 11,
+    "time": "2025-10-31T23:36:20.231162",
+    "file": "D:\\test_ransomware\\file1.encrypted",
+    "reason": "Ransomware extension: .encrypted",
+    "risk": "CRITICAL",
+    "score": 0.95,
+    "backup": "backups\\file1_20251031_233620.encrypted"
+  },
+  {
+    "id": 10,
+    "time": "2025-10-31T23:27:10.403673",
+    "file": "D:\\test_ransomware\\file4.wannacry",
+    "reason": "Ransomware extension: .wannacry",
+    "risk": "CRITICAL",
+    "score": 0.95,
+    "backup": "backups\\file4_20251031_232710.wannacry"
+  },
+  {
+    "id": 9,
+    "time": "2025-10-31T23:26:58.890305",
+    "file": "D:\\test_ransomware\\file3.crypto",
+    "reason": "Ransomware extension: .crypto",
+    "risk": "CRITICAL",
+    "score": 0.95,
+    "backup": "backups\\file3_20251031_232658.crypto"
+  },
+  {
+    "id": 8,
+    "time": "2025-10-31T23:26:46.522887",
+    "file": "D:\\test_ransomware\\file2.locked",
+    "reason": "Ransomware extension: .locked",
+    "risk": "CRITICAL",
+    "score": 0.95,
+    "backup": "backups\\file2_20251031_232646.locked"
+  },
+  {
+    "id": 7,
+    "time": "2025-10-31T23:26:34.588314",
+    "file": "D:\\test_ransomware\\file1.encrypted",
+    "reason": "Ransomware extension: .encrypted",
+    "risk": "CRITICAL",
+    "score": 0.95,
+    "backup": "backups\\file1_20251031_232634.encrypted"
+  },
+  {
+    "id": 6,
+    "time": "2025-10-31T23:26:24.403867",
+    "file": "D:\\test_ransomware\\file1.encrypted",
+    "reason": "Ransomware extension: .encrypted",
+    "risk": "CRITICAL",
+    "score": 0.95,
+    "backup": "backups\\file1_20251031_232624.encrypted"
+  },
+  {
+    "id": 5,
+    "time": "2025-10-31T21:54:16.865695",
+    "file": "D:\\test_folder\\file4.wannacry",
+    "reason": "Ransomware extension: .wannacry",
+    "risk": "CRITICAL",
+    "score": 0.95,
+    "backup": "backups\\file4_20251031_215416.wannacry"
+  },
+  {
+    "id": 4,
+    "time": "2025-10-31T21:54:06.245244",
+    "file": "D:\\test_folder\\file3.crypto",
+    "reason": "Ransomware extension: .crypto",
+    "risk": "CRITICAL",
+    "score": 0.95,
+    "backup": "backups\\file3_20251031_215406.crypto"
+  },
+  {
+    "id": 3,
+    "time": "2025-10-31T21:53:52.040046",
+    "file": "D:\\test_folder\\file2.locked",
+    "reason": "Ransomware extension: .locked",
+    "risk": "CRITICAL",
+    "score": 0.95,
+    "backup": "backups\\file2_20251031_215352.locked"
+  },
+  {
+    "id": 2,
+    "time": "2025-10-31T21:53:38.087736",
+    "file": "D:\\test_folder\\file1.encrypted",
+    "reason": "Ransomware extension: .encrypted",
+    "risk": "CRITICAL",
+    "score": 0.95,
+    "backup": "backups\\file1_20251031_215338.encrypted"
+  },
+  {
+    "id": 1,
+    "time": "2025-10-31T21:53:26.239426",
+    "file": "D:\\test_folder\\file1.encrypted",
+    "reason": "Ransomware extension: .encrypted",
+    "risk": "CRITICAL",
+    "score": 0.95,
+    "backup": "backups\\file1_20251031_215326.encrypted"
+  }
+]
