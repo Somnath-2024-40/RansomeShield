@@ -384,11 +384,6 @@ export default function RansomShieldDashboard() {
           </div>
         </div>
       </div>
-      {/* NOTE: To get the perfect visual from the image, you'll need to define a 
-        custom font like "VT323" or similar mono/digital font, and you'll 
-        need to inject a global CSS style for the background image and the
-        scrollbar (e.g., using a global 'styles.css' file or Tailwind's JIT mode). 
-      */}
     </div>
   );
 }
