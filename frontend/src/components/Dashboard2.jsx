@@ -312,9 +312,9 @@ export default function RansomShieldDashboard() {
             </button>
           </div>
           <div className="flex flex-wrap gap-4 pt-2">
-            <button onClick={scanFile} className="px-6 py-3 bg-gray-700 text-green-400 rounded-lg font-bold hover:bg-gray-600 hover:text-[#00ff41] transition-colors border border-green-900">
+            {/* <button onClick={scanFile} className="px-6 py-3 bg-gray-700 text-green-400 rounded-lg font-bold hover:bg-gray-600 hover:text-[#00ff41] transition-colors border border-green-900">
                 Scan File
-            </button>
+            </button> */}
             <button onClick={generateReport} className="px-6 py-3 bg-gray-700 text-green-400 rounded-lg font-bold hover:bg-gray-600 hover:text-[#00ff41] transition-colors border border-green-900">
                 Generate Report
             </button>

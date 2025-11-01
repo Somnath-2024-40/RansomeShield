@@ -1,8 +1,8 @@
 export default function Footer() {
   return (
-    <div>
+    <div className="bg-[#101828]">
       {/* Footer */}
-      <div className="mt-8 mx-10 pt-6 pb-6  border-t-2 border-gray-200">
+      <div className=" mx-10 pt-6 pb-6 bg-[#101828]  border-t-2 border-gray-200">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 ml-5 lg:ml-20 ">
           {/* Tech Stack */}
           <div>
@@ -23,7 +23,7 @@ export default function Footer() {
             <h3 className="text-sm font-bold text-[#667eea] mb-3 flex items-center gap-2">
               🛡️ Protection Layers
             </h3>
-            <ul className="text-xs text-gray-600 space-y-1">
+            <ul className="text-xs text-gray-400 space-y-1">
               <li>✓ Entropy Analysis Detection</li>
               <li>✓ ML-Based Threat Classification</li>
               <li>✓ Behavioral Pattern Monitoring</li>
@@ -37,7 +37,7 @@ export default function Footer() {
             <h3 className="text-sm font-bold text-[#667eea] mb-3 flex items-center gap-2">
               📊 System Info
             </h3>
-            <div className="text-xs text-gray-600 space-y-1">
+            <div className="text-xs text-gray-400 space-y-1">
               <p><strong>Version:</strong> 1.0.0</p>
               <p><strong>Detection Accuracy:</strong> 99.7%</p>
               <p><strong>Response Time:</strong> {'<'}1 second</p>
@@ -49,11 +49,11 @@ export default function Footer() {
 
         {/* Bottom Footer */}
         <div className="flex flex-col md:flex-row justify-between items-center pt-4 border-t border-gray-200">
-          <div className="text-sm text-gray-600 mb-2 md:mb-0">
+          <div className="text-sm text-gray-400 mb-2 md:mb-0">
             <span className="font-bold text-[#667eea]">RansomShield Pro</span> © 2025 | 
             Advanced Multi-Layer Ransomware Defense System
           </div>
-          <div className="flex gap-4 text-xs text-gray-500">
+          <div className="flex gap-4 text-xs text-gray-400">
             <a href="#" className="hover:text-[#667eea] transition-colors">Documentation</a>
             <span>•</span>
             <a href="#" className="hover:text-[#667eea] transition-colors">API Reference</a>
