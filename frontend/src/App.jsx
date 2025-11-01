@@ -1,16 +1,16 @@
-import {  } from 'react'
-import Dashboard from "./components/Dashboard.jsx"
-import './App.css'
+import {} from "react";
+import RansomShieldDashboard from "./components/Dashboard.jsx";
+import Footer from "./components/Footer.jsx"
+import "./App.css";
 
 function App() {
-
-  return (
-    <>
-      
-      <Dashboard />
-    </>
-  )
+    return (
+        <>
+          
+                <RansomShieldDashboard />
+            <Footer />
+        </>
+    );
 }
 
-export default App
- 
+export default App;
