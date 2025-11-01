@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +26,7 @@
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
 
         .header {
@@ -80,7 +81,7 @@
             color: white;
             padding: 25px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s;
         }
 
@@ -182,14 +183,16 @@
             margin-bottom: 20px;
         }
 
-        .threats-section, .viz-section {
+        .threats-section,
+        .viz-section {
             background: white;
             border-radius: 15px;
             padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .threats-section h2, .viz-section h2 {
+        .threats-section h2,
+        .viz-section h2 {
             color: #667eea;
             margin-bottom: 20px;
             display: flex;
@@ -298,8 +301,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
         }
 
         .pulse {
@@ -321,15 +331,16 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
             <h1>
-                🛡️ RansomShield Pro
+                RansomShield
             </h1>
             <p>Advanced Multi-Layer Ransomware Detection & Response System</p>
             <div class="status-badge status-inactive" id="systemStatus">
-                ⏸️ Monitoring Inactive
+                Monitoring Inactive
             </div>
         </div>
 
@@ -361,27 +372,23 @@
         <div class="controls">
             <h3 style="margin-bottom: 15px; color: #667eea;">📂 Monitoring Controls</h3>
             <div class="control-group">
-                <input
-                    type="text"
-                    id="directoryInput"
-                    placeholder="Enter directory path (e.g., D:\test_folder)"
-                />
+                <input type="text" id="directoryInput" placeholder="Enter directory path (e.g., D:\test_folder)" />
                 <button class="btn-primary" onclick="startMonitoring()">
-                    🚀 Start Protection
+                    Start Protection
                 </button>
                 <button class="btn-danger" onclick="stopMonitoring()">
-                    ⏹️ Stop
+                    Stop
                 </button>
             </div>
             <div class="control-group">
-                <button class="btn-success" onclick="scanFile()">
-                    🔍 Scan File
-                </button>
+                <!-- <button class="btn-success" onclick="scanFile()">
+                    Scan File
+                </button> -->
                 <button class="btn-secondary" onclick="generateReport()">
-                    📊 Generate Report
+                    Generate Report
                 </button>
                 <button class="btn-secondary" onclick="refreshDashboard()">
-                    🔄 Refresh
+                    Refresh
                 </button>
             </div>
         </div>
@@ -390,7 +397,7 @@
         <div class="content-grid">
             <!-- Threats List -->
             <div class="threats-section">
-                <h2>🚨 Recent Threats</h2>
+                <h2> Recent Threats</h2>
                 <div class="threats-list" id="threatsList">
                     <div class="loading pulse">Loading threats...</div>
                 </div>
@@ -398,7 +405,7 @@
 
             <!-- Visualization -->
             <div class="viz-section">
-                <h2>📈 Threat Activity</h2>
+                <h2> Threat Activity</h2>
                 <canvas id="threatCanvas"></canvas>
                 <div style="margin-top: 20px; font-size: 0.9em; color: #6b7280;">
                     <p><strong>Detection Engine:</strong> <span id="mlStatus">Active</span></p>
@@ -407,6 +414,13 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
 
     <script>
         const API_URL = 'http://localhost:8000/api';
@@ -424,19 +438,19 @@
             try {
                 const response = await fetch(`${API_URL}/monitor/start`, {
                     method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({directory})
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ directory })
                 });
 
                 const result = await response.json();
 
                 if (result.success) {
-                    alert(`✅ Protection started!\n🍯 ${result.honeypots} honeypots deployed!`);
+                    alert(` Protection started!\n ${result.honeypots} honeypots deployed!`);
                     document.getElementById('systemStatus').className = 'status-badge status-active';
-                    document.getElementById('systemStatus').textContent = '✅ Active Protection';
+                    document.getElementById('systemStatus').textContent = ' Active Protection';
                     refreshDashboard();
                 } else {
-                    alert('❌ Failed to start monitoring!');
+                    alert(' Failed to start monitoring!');
                 }
             } catch (error) {
                 alert('Error: ' + error.message);
@@ -450,8 +464,8 @@
             try {
                 await fetch(`${API_URL}/monitor/stop`, {
                     method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({directory})
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ directory })
                 });
 
                 alert('⏹️ Monitoring stopped');
@@ -471,17 +485,17 @@
             try {
                 const response = await fetch(`${API_URL}/scan`, {
                     method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({file_path: filePath})
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ file_path: filePath })
                 });
 
                 const result = await response.json();
 
-                let message = `🔍 SCAN RESULTS\n\n`;
+                let message = ` SCAN RESULTS\n\n`;
                 message += `File: ${result.file}\n\n`;
                 message += `Verdict: ${result.verdict}\n\n`;
                 message += `Detection Results:\n`;
-                message += `  - Threat: ${result.entropy_scan.threat ? '⚠️ YES' : '✅ NO'}\n`;
+                message += `  - Threat: ${result.entropy_scan.threat ? ' YES' : ' NO'}\n`;
                 message += `  - Reason: ${result.entropy_scan.reason}\n`;
                 message += `  - Risk Level: ${result.entropy_scan.risk}\n`;
                 message += `  - Score: ${(result.entropy_scan.score * 100).toFixed(1)}%\n`;
@@ -518,7 +532,7 @@
 
         // Refresh dashboard
         async function refreshDashboard() {
-            console.log("🔄 Refreshing dashboard...");
+            console.log(" Refreshing dashboard...");
 
             try {
                 // Get stats
@@ -539,22 +553,22 @@
                 const threatsList = document.getElementById('threatsList');
 
                 if (threats.length === 0) {
-                    threatsList.innerHTML = '<div class="no-threats">✅ No threats detected - System is clean</div>';
+                    threatsList.innerHTML = '<div class="no-threats"> No threats detected - System is clean</div>';
                 } else {
                     let html = '';
                     threats.forEach(threat => {
                         html += `
                             <div class="threat-item ${threat.risk}">
                                 <div class="threat-header">
-                                    <span class="threat-type">🚨 ${threat.reason}</span>
+                                    <span class="threat-type"> ${threat.reason}</span>
                                     <span class="risk-badge risk-${threat.risk}">${threat.risk}</span>
                                 </div>
                                 <div class="threat-details">
                                     Score: ${(threat.score * 100).toFixed(1)}%
-                                    ${threat.backup ? ` | Backup: ✅` : ''}
+                                    ${threat.backup ? ` | Backup: ` : ''}
                                 </div>
-                                <div class="file-path">📁 ${threat.file}</div>
-                                <div class="threat-details">⏰ ${new Date(threat.time).toLocaleString()}</div>
+                                <div class="file-path"> ${threat.file}</div>
+                                <div class="threat-details"> ${new Date(threat.time).toLocaleString()}</div>
                             </div>
                         `;
                     });
@@ -565,7 +579,7 @@
                 drawVisualization(threats);
 
             } catch (error) {
-                console.error('❌ Error:', error);
+                console.error(' Error:', error);
             }
         }
 
@@ -589,7 +603,7 @@
                 return;
             }
 
-            // Draw threats as timeline
+
             const maxThreats = Math.min(threats.length, 20);
             const barWidth = canvas.width / maxThreats - 5;
 
@@ -600,7 +614,7 @@
 
                 // Color based on risk
                 ctx.fillStyle = threat.risk === 'CRITICAL' ? '#ef4444' :
-                               threat.risk === 'HIGH' ? '#f59e0b' : '#3b82f6';
+                    threat.risk === 'HIGH' ? '#f59e0b' : '#3b82f6';
 
                 ctx.fillRect(x, y, barWidth, height);
 
@@ -610,720 +624,19 @@
                 ctx.strokeRect(x, y, barWidth, height);
             });
 
-            // Draw labels
             ctx.fillStyle = '#6b7280';
             ctx.font = '12px Arial';
             ctx.textAlign = 'left';
             ctx.fillText('Threat Timeline (Most Recent)', 10, 20);
         }
 
-        // Auto-refresh every 5 seconds
+
         refreshInterval = setInterval(refreshDashboard, 5000);
 
-        // Initial load
+
         refreshDashboard();
 
     </script>
 </body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--    <title>RansomShield Pro - Advanced Ransomware Defense</title>-->
-<!--    <style>-->
-<!--        * {-->
-<!--            margin: 0;-->
-<!--            padding: 0;-->
-<!--            box-sizing: border-box;-->
-<!--        }-->
-
-<!--        body {-->
-<!--            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;-->
-<!--            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);-->
-<!--            min-height: 100vh;-->
-<!--            padding: 20px;-->
-<!--            color: #333;-->
-<!--        }-->
-
-<!--        .container {-->
-<!--            max-width: 1400px;-->
-<!--            margin: 0 auto;-->
-<!--            background: rgba(255, 255, 255, 0.95);-->
-<!--            border-radius: 20px;-->
-<!--            padding: 30px;-->
-<!--            box-shadow: 0 20px 60px rgba(0,0,0,0.3);-->
-<!--        }-->
-
-<!--        .header {-->
-<!--            text-align: center;-->
-<!--            margin-bottom: 40px;-->
-<!--            padding-bottom: 20px;-->
-<!--            border-bottom: 3px solid #667eea;-->
-<!--        }-->
-
-<!--        .header h1 {-->
-<!--            font-size: 2.5em;-->
-<!--            color: #667eea;-->
-<!--            margin-bottom: 10px;-->
-<!--            display: flex;-->
-<!--            align-items: center;-->
-<!--            justify-content: center;-->
-<!--            gap: 15px;-->
-<!--        }-->
-
-<!--        .header p {-->
-<!--            color: #666;-->
-<!--            font-size: 1.1em;-->
-<!--        }-->
-
-<!--        .status-badge {-->
-<!--            display: inline-block;-->
-<!--            padding: 8px 20px;-->
-<!--            border-radius: 25px;-->
-<!--            font-weight: bold;-->
-<!--            margin-top: 10px;-->
-<!--        }-->
-
-<!--        .status-active {-->
-<!--            background: #10b981;-->
-<!--            color: white;-->
-<!--        }-->
-
-<!--        .status-inactive {-->
-<!--            background: #6b7280;-->
-<!--            color: white;-->
-<!--        }-->
-
-<!--        .stats-grid {-->
-<!--            display: grid;-->
-<!--            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));-->
-<!--            gap: 20px;-->
-<!--            margin-bottom: 30px;-->
-<!--        }-->
-
-<!--        .stat-card {-->
-<!--            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);-->
-<!--            color: white;-->
-<!--            padding: 25px;-->
-<!--            border-radius: 15px;-->
-<!--            box-shadow: 0 10px 30px rgba(0,0,0,0.2);-->
-<!--            transition: transform 0.3s;-->
-<!--        }-->
-
-<!--        .stat-card:hover {-->
-<!--            transform: translateY(-5px);-->
-<!--        }-->
-
-<!--        .stat-card h3 {-->
-<!--            font-size: 0.9em;-->
-<!--            opacity: 0.9;-->
-<!--            margin-bottom: 10px;-->
-<!--        }-->
-
-<!--        .stat-card .number {-->
-<!--            font-size: 2.5em;-->
-<!--            font-weight: bold;-->
-<!--        }-->
-
-<!--        .controls {-->
-<!--            background: #f3f4f6;-->
-<!--            padding: 25px;-->
-<!--            border-radius: 15px;-->
-<!--            margin-bottom: 30px;-->
-<!--        }-->
-
-<!--        .control-group {-->
-<!--            display: flex;-->
-<!--            gap: 10px;-->
-<!--            margin-bottom: 15px;-->
-<!--            flex-wrap: wrap;-->
-<!--        }-->
-
-<!--        input[type="text"] {-->
-<!--            flex: 1;-->
-<!--            min-width: 300px;-->
-<!--            padding: 12px 15px;-->
-<!--            border: 2px solid #d1d5db;-->
-<!--            border-radius: 8px;-->
-<!--            font-size: 1em;-->
-<!--            transition: border-color 0.3s;-->
-<!--        }-->
-
-<!--        input[type="text"]:focus {-->
-<!--            outline: none;-->
-<!--            border-color: #667eea;-->
-<!--        }-->
-
-<!--        button {-->
-<!--            padding: 12px 25px;-->
-<!--            border: none;-->
-<!--            border-radius: 8px;-->
-<!--            font-size: 1em;-->
-<!--            font-weight: bold;-->
-<!--            cursor: pointer;-->
-<!--            transition: all 0.3s;-->
-<!--        }-->
-
-<!--        .btn-primary {-->
-<!--            background: #667eea;-->
-<!--            color: white;-->
-<!--        }-->
-
-<!--        .btn-primary:hover {-->
-<!--            background: #5568d3;-->
-<!--            transform: scale(1.05);-->
-<!--        }-->
-
-<!--        .btn-danger {-->
-<!--            background: #ef4444;-->
-<!--            color: white;-->
-<!--        }-->
-
-<!--        .btn-danger:hover {-->
-<!--            background: #dc2626;-->
-<!--        }-->
-
-<!--        .btn-success {-->
-<!--            background: #10b981;-->
-<!--            color: white;-->
-<!--        }-->
-
-<!--        .btn-success:hover {-->
-<!--            background: #059669;-->
-<!--        }-->
-
-<!--        .btn-secondary {-->
-<!--            background: #6b7280;-->
-<!--            color: white;-->
-<!--        }-->
-
-<!--        .btn-secondary:hover {-->
-<!--            background: #4b5563;-->
-<!--        }-->
-
-<!--        .content-grid {-->
-<!--            display: grid;-->
-<!--            grid-template-columns: 2fr 1fr;-->
-<!--            gap: 20px;-->
-<!--            margin-bottom: 20px;-->
-<!--        }-->
-
-<!--        .threats-section, .viz-section {-->
-<!--            background: white;-->
-<!--            border-radius: 15px;-->
-<!--            padding: 25px;-->
-<!--            box-shadow: 0 5px 15px rgba(0,0,0,0.1);-->
-<!--        }-->
-
-<!--        .threats-section h2, .viz-section h2 {-->
-<!--            color: #667eea;-->
-<!--            margin-bottom: 20px;-->
-<!--            display: flex;-->
-<!--            align-items: center;-->
-<!--            gap: 10px;-->
-<!--        }-->
-
-<!--        .threats-list {-->
-<!--            max-height: 500px;-->
-<!--            overflow-y: auto;-->
-<!--        }-->
-
-<!--        .threat-item {-->
-<!--            background: #f9fafb;-->
-<!--            border-left: 4px solid #667eea;-->
-<!--            padding: 15px;-->
-<!--            margin-bottom: 12px;-->
-<!--            border-radius: 8px;-->
-<!--            transition: transform 0.2s;-->
-<!--        }-->
-
-<!--        .threat-item:hover {-->
-<!--            transform: translateX(5px);-->
-<!--        }-->
-
-<!--        .threat-item.CRITICAL {-->
-<!--            border-left-color: #ef4444;-->
-<!--            background: #fef2f2;-->
-<!--        }-->
-
-<!--        .threat-item.HIGH {-->
-<!--            border-left-color: #f59e0b;-->
-<!--            background: #fffbeb;-->
-<!--        }-->
-
-<!--        .threat-item.MEDIUM {-->
-<!--            border-left-color: #3b82f6;-->
-<!--            background: #eff6ff;-->
-<!--        }-->
-
-<!--        .threat-header {-->
-<!--            display: flex;-->
-<!--            justify-content: space-between;-->
-<!--            align-items: center;-->
-<!--            margin-bottom: 8px;-->
-<!--        }-->
-
-<!--        .threat-type {-->
-<!--            font-weight: bold;-->
-<!--            color: #1f2937;-->
-<!--        }-->
-
-<!--        .risk-badge {-->
-<!--            padding: 4px 12px;-->
-<!--            border-radius: 12px;-->
-<!--            font-size: 0.8em;-->
-<!--            font-weight: bold;-->
-<!--        }-->
-
-<!--        .risk-CRITICAL {-->
-<!--            background: #ef4444;-->
-<!--            color: white;-->
-<!--        }-->
-
-<!--        .risk-HIGH {-->
-<!--            background: #f59e0b;-->
-<!--            color: white;-->
-<!--        }-->
-
-<!--        .risk-MEDIUM {-->
-<!--            background: #3b82f6;-->
-<!--            color: white;-->
-<!--        }-->
-
-<!--        .threat-details {-->
-<!--            font-size: 0.9em;-->
-<!--            color: #6b7280;-->
-<!--            margin-top: 5px;-->
-<!--        }-->
-
-<!--        .file-path {-->
-<!--            font-family: monospace;-->
-<!--            font-size: 0.85em;-->
-<!--            color: #4b5563;-->
-<!--            margin-top: 5px;-->
-<!--            word-break: break-all;-->
-<!--        }-->
-
-<!--        .no-threats {-->
-<!--            text-align: center;-->
-<!--            padding: 40px;-->
-<!--            color: #9ca3af;-->
-<!--        }-->
-
-<!--        #threatCanvas {-->
-<!--            width: 100%;-->
-<!--            height: 300px;-->
-<!--            background: #f9fafb;-->
-<!--            border-radius: 10px;-->
-<!--        }-->
-
-<!--        .loading {-->
-<!--            text-align: center;-->
-<!--            padding: 20px;-->
-<!--            color: #9ca3af;-->
-<!--        }-->
-
-<!--        @keyframes pulse {-->
-<!--            0%, 100% { opacity: 1; }-->
-<!--            50% { opacity: 0.5; }-->
-<!--        }-->
-
-<!--        .pulse {-->
-<!--            animation: pulse 2s infinite;-->
-<!--        }-->
-
-<!--        @media (max-width: 768px) {-->
-<!--            .content-grid {-->
-<!--                grid-template-columns: 1fr;-->
-<!--            }-->
-
-<!--            .control-group {-->
-<!--                flex-direction: column;-->
-<!--            }-->
-
-<!--            input[type="text"] {-->
-<!--                min-width: 100%;-->
-<!--            }-->
-<!--        }-->
-<!--    </style>-->
-<!--</head>-->
-<!--<body>-->
-<!--    <div class="container">-->
-<!--        <div class="header">-->
-<!--            <h1>-->
-<!--                🛡️ RansomShield Pro-->
-<!--            </h1>-->
-<!--            <p>Advanced ML-Powered Ransomware Detection & Response System</p>-->
-<!--            <div class="status-badge status-inactive" id="systemStatus">-->
-<!--                ⏸️ Monitoring Inactive-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; Statistics Grid &ndash;&gt;-->
-<!--        <div class="stats-grid">-->
-<!--            <div class="stat-card">-->
-<!--                <h3>Total Threats</h3>-->
-<!--                <div class="number" id="totalThreats">0</div>-->
-<!--            </div>-->
-<!--            <div class="stat-card">-->
-<!--                <h3>Critical Alerts</h3>-->
-<!--                <div class="number" id="criticalThreats">0</div>-->
-<!--            </div>-->
-<!--            <div class="stat-card">-->
-<!--                <h3>Files Protected</h3>-->
-<!--                <div class="number" id="backupsCreated">0</div>-->
-<!--            </div>-->
-<!--            <div class="stat-card">-->
-<!--                <h3>Honeypots Active</h3>-->
-<!--                <div class="number" id="honeypotsActive">0</div>-->
-<!--            </div>-->
-<!--            <div class="stat-card">-->
-<!--                <h3>Processes Killed</h3>-->
-<!--                <div class="number" id="processesKilled">0</div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; Controls &ndash;&gt;-->
-<!--        <div class="controls">-->
-<!--            <h3 style="margin-bottom: 15px; color: #667eea;">📂 Monitoring Controls</h3>-->
-<!--            <div class="control-group">-->
-<!--                <input-->
-<!--                    type="text"-->
-<!--                    id="directoryInput"-->
-<!--                    placeholder="Enter directory path (e.g., D:\test_folder)"-->
-<!--                />-->
-<!--                <button class="btn-primary" onclick="startMonitoring()">-->
-<!--                    🚀 Start Protection-->
-<!--                </button>-->
-<!--                <button class="btn-danger" onclick="stopMonitoring()">-->
-<!--                    ⏹️ Stop-->
-<!--                </button>-->
-<!--            </div>-->
-<!--            <div class="control-group">-->
-<!--                <button class="btn-success" onclick="scanFile()">-->
-<!--                    🔍 Scan File-->
-<!--                </button>-->
-<!--                <button class="btn-secondary" onclick="generateReport()">-->
-<!--                    📊 Generate Report-->
-<!--                </button>-->
-<!--                <button class="btn-secondary" onclick="refreshDashboard()">-->
-<!--                    🔄 Refresh-->
-<!--                </button>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; Content Grid &ndash;&gt;-->
-<!--        <div class="content-grid">-->
-<!--            &lt;!&ndash; Threats List &ndash;&gt;-->
-<!--            <div class="threats-section">-->
-<!--                <h2>🚨 Recent Threats</h2>-->
-<!--                <div class="threats-list" id="threatsList">-->
-<!--                    <div class="loading pulse">Loading threats...</div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            &lt;!&ndash; Visualization &ndash;&gt;-->
-<!--            <div class="viz-section">-->
-<!--                <h2>📈 Threat Activity</h2>-->
-<!--                <canvas id="threatCanvas"></canvas>-->
-<!--                <div style="margin-top: 20px; font-size: 0.9em; color: #6b7280;">-->
-<!--                    <p><strong>ML Model Status:</strong> <span id="mlStatus">Active</span></p>-->
-<!--                    <p><strong>Backup Size:</strong> <span id="backupSize">0 MB</span></p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    <script>-->
-<!--        const API_URL = 'http://localhost:8000/api';-->
-<!--        let refreshInterval;-->
-
-<!--        // Start monitoring-->
-<!--        async function startMonitoring() {-->
-<!--            const directory = document.getElementById('directoryInput').value.trim();-->
-
-<!--            if (!directory) {-->
-<!--                alert('Please enter a directory path!');-->
-<!--                return;-->
-<!--            }-->
-
-<!--            try {-->
-<!--                const response = await fetch(`${API_URL}/monitor/start`, {-->
-<!--                    method: 'POST',-->
-<!--                    headers: {'Content-Type': 'application/json'},-->
-<!--                    body: JSON.stringify({directory})-->
-<!--                });-->
-
-<!--                const result = await response.json();-->
-
-<!--                if (result.success) {-->
-<!--                    alert(`✅ Protection started!\n🍯 ${result.honeypots} honeypots deployed!`);-->
-<!--                    document.getElementById('systemStatus').className = 'status-badge status-active';-->
-<!--                    document.getElementById('systemStatus').textContent = '✅ Active Protection';-->
-<!--                    refreshDashboard();-->
-<!--                } else {-->
-<!--                    alert('❌ Failed to start monitoring!');-->
-<!--                }-->
-<!--            } catch (error) {-->
-<!--                alert('Error: ' + error.message);-->
-<!--            }-->
-<!--        }-->
-
-<!--        // Stop monitoring-->
-<!--        async function stopMonitoring() {-->
-<!--            const directory = document.getElementById('directoryInput').value.trim();-->
-
-<!--            try {-->
-<!--                await fetch(`${API_URL}/monitor/stop`, {-->
-<!--                    method: 'POST',-->
-<!--                    headers: {'Content-Type': 'application/json'},-->
-<!--                    body: JSON.stringify({directory})-->
-<!--                });-->
-
-<!--                alert('⏹️ Monitoring stopped');-->
-<!--                document.getElementById('systemStatus').className = 'status-badge status-inactive';-->
-<!--                document.getElementById('systemStatus').textContent = '⏸️ Monitoring Inactive';-->
-<!--            } catch (error) {-->
-<!--                alert('Error: ' + error.message);-->
-<!--            }-->
-<!--        }-->
-
-<!--        // Scan single file-->
-<!--        async function scanFile() {-->
-<!--            const filePath = prompt('Enter full file path to scan:');-->
-
-<!--            if (!filePath) return;-->
-
-<!--            try {-->
-<!--                const response = await fetch(`${API_URL}/scan`, {-->
-<!--                    method: 'POST',-->
-<!--                    headers: {'Content-Type': 'application/json'},-->
-<!--                    body: JSON.stringify({file_path: filePath})-->
-<!--                });-->
-
-<!--                const result = await response.json();-->
-
-<!--                let message = `🔍 SCAN RESULTS\n\n`;-->
-<!--                message += `File: ${result.file}\n\n`;-->
-<!--                message += `Verdict: ${result.verdict}\n\n`;-->
-<!--                message += `Entropy Scan:\n`;-->
-<!--                message += `  - Threat: ${result.entropy_scan.threat ? '⚠️ YES' : '✅ NO'}\n`;-->
-<!--                message += `  - Reason: ${result.entropy_scan.reason}\n\n`;-->
-<!--                message += `ML Scan:\n`;-->
-<!--                message += `  - Threat: ${result.ml_scan.is_threat ? '⚠️ YES' : '✅ NO'}\n`;-->
-<!--                message += `  - Confidence: ${(result.ml_scan.confidence * 100).toFixed(1)}%\n`;-->
-
-<!--                alert(message);-->
-<!--            } catch (error) {-->
-<!--                alert('Error: ' + error.message);-->
-<!--            }-->
-<!--        }-->
-
-<!--        // Generate report-->
-<!--        async function generateReport() {-->
-<!--            try {-->
-<!--                const response = await fetch(`${API_URL}/report`);-->
-<!--                const report = await response.json();-->
-
-<!--                let message = `=== RANSOMSHIELD FORENSIC REPORT ===\n\n`;-->
-<!--                message += `Report ID: ${report.report_id}\n`;-->
-<!--                message += `Generated: ${new Date(report.generated).toLocaleString()}\n\n`;-->
-<!--                message += `SUMMARY:\n`;-->
-<!--                message += `  Total Threats: ${report.summary.total_threats}\n`;-->
-<!--                message += `  Critical: ${report.summary.critical_threats}\n`;-->
-<!--                message += `  Files Protected: ${report.summary.files_protected}\n\n`;-->
-<!--                message += `RECOMMENDATIONS:\n`;-->
-<!--                report.recommendations.forEach((rec, i) => {-->
-<!--                    message += `  ${i + 1}. ${rec}\n`;-->
-<!--                });-->
-
-<!--                alert(message);-->
-<!--            } catch (error) {-->
-<!--                alert('Error: ' + error.message);-->
-<!--            }-->
-<!--        }-->
-
-<!--        // Refresh dashboard-->
-<!--        async function refreshDashboard() {-->
-<!--            console.log("🔄 Refreshing dashboard...");-->
-
-<!--            try {-->
-<!--                // Get stats-->
-<!--                const stats = await fetch(`${API_URL}/stats`).then(r => r.json());-->
-<!--                console.log("📊 Stats:", stats);-->
-
-<!--                document.getElementById('totalThreats').textContent = stats.total_threats || 0;-->
-<!--                document.getElementById('criticalThreats').textContent = stats.critical || 0;-->
-<!--                document.getElementById('backupsCreated').textContent = stats.backups_created || 0;-->
-<!--                document.getElementById('honeypotsActive').textContent = stats.honeypots_active || 0;-->
-<!--                document.getElementById('processesKilled').textContent = stats.processes_killed || 0;-->
-<!--                document.getElementById('backupSize').textContent = `${stats.backup_size_mb || 0} MB`;-->
-
-<!--                // Get threats-->
-<!--                const threats = await fetch(`${API_URL}/threats`).then(r => r.json());-->
-<!--                console.log("🚨 Threats:", threats);-->
-
-<!--                const threatsList = document.getElementById('threatsList');-->
-
-<!--                if (threats.length === 0) {-->
-<!--                    threatsList.innerHTML = '<div class="no-threats">✅ No threats detected - System is clean</div>';-->
-<!--                } else {-->
-<!--                    let html = '';-->
-<!--                    threats.forEach(threat => {-->
-<!--                        html += `-->
-<!--                            <div class="threat-item ${threat.risk}">-->
-<!--                                <div class="threat-header">-->
-<!--                                    <span class="threat-type">🚨 ${threat.reason}</span>-->
-<!--                                    <span class="risk-badge risk-${threat.risk}">${threat.risk}</span>-->
-<!--                                </div>-->
-<!--                                <div class="threat-details">-->
-<!--                                    Score: ${(threat.score * 100).toFixed(1)}%-->
-<!--                                    ${threat.ml_score ? ` | ML: ${(threat.ml_score * 100).toFixed(1)}%` : ''}-->
-<!--                                </div>-->
-<!--                                <div class="file-path">📁 ${threat.file}</div>-->
-<!--                                <div class="threat-details">⏰ ${new Date(threat.time).toLocaleString()}</div>-->
-<!--                            </div>-->
-<!--                        `;-->
-<!--                    });-->
-<!--                    threatsList.innerHTML = html;-->
-<!--                }-->
-
-<!--                // Update visualization-->
-<!--                drawVisualization(threats);-->
-
-<!--            } catch (error) {-->
-<!--                console.error('❌ Error:', error);-->
-<!--            }-->
-<!--        }-->
-
-<!--        // Draw threat visualization-->
-<!--        function drawVisualization(threats) {-->
-<!--            const canvas = document.getElementById('threatCanvas');-->
-<!--            const ctx = canvas.getContext('2d');-->
-
-<!--            // Set canvas size-->
-<!--            canvas.width = canvas.offsetWidth;-->
-<!--            canvas.height = 300;-->
-
-<!--            // Clear canvas-->
-<!--            ctx.clearRect(0, 0, canvas.width, canvas.height);-->
-
-<!--            if (threats.length === 0) {-->
-<!--                ctx.fillStyle = '#9ca3af';-->
-<!--                ctx.font = '16px Arial';-->
-<!--                ctx.textAlign = 'center';-->
-<!--                ctx.fillText('No threats to visualize', canvas.width / 2, canvas.height / 2);-->
-<!--                return;-->
-<!--            }-->
-
-<!--            // Draw threats as timeline-->
-<!--            const maxThreats = Math.min(threats.length, 20);-->
-<!--            const barWidth = canvas.width / maxThreats - 5;-->
-
-<!--            threats.slice(0, maxThreats).reverse().forEach((threat, i) => {-->
-<!--                const x = i * (barWidth + 5);-->
-<!--                const height = (threat.score * canvas.height * 0.8);-->
-<!--                const y = canvas.height - height;-->
-
-<!--                // Color based on risk-->
-<!--                ctx.fillStyle = threat.risk === 'CRITICAL' ? '#ef4444' :-->
-<!--                               threat.risk === 'HIGH' ? '#f59e0b' : '#3b82f6';-->
-
-<!--                ctx.fillRect(x, y, barWidth, height);-->
-
-<!--                // Draw border-->
-<!--                ctx.strokeStyle = '#fff';-->
-<!--                ctx.lineWidth = 2;-->
-<!--                ctx.strokeRect(x, y, barWidth, height);-->
-<!--            });-->
-
-<!--            // Draw labels-->
-<!--            ctx.fillStyle = '#6b7280';-->
-<!--            ctx.font = '12px Arial';-->
-<!--            ctx.textAlign = 'left';-->
-<!--            ctx.fillText('Threat Timeline (Most Recent)', 10, 20);-->
-<!--        }-->
-
-<!--        // Auto-refresh every 5 seconds-->
-<!--        refreshInterval = setInterval(refreshDashboard, 5000);-->
-
-<!--        // Initial load-->
-<!--        refreshDashboard();-->
-
-<!--    </script>-->
-<!--</body>-->
-<!--</html>-->

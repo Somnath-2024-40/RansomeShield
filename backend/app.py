@@ -9,6 +9,8 @@ from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
 import time
+import psutil
+
 
 from detector import ThreatDetector
 from monitor import FileMonitor
@@ -42,34 +44,98 @@ alerts = AlertSystem()
 recent_changes = []
 
 
+# def threat_callback(file_path):
+#     """Handle file change events"""
+#     global recent_changes
+
+#     print(f"\n{'=' * 50}")
+#     print(f" New File: {file_path}")
+#     print(f"{'=' * 50}")
+
+#     try:
+#         # Check if it's a honeypot
+#         if honeypot_manager.is_honeypot(file_path):
+#             print(f" HONEYPOT TRAP TRIGGERED!")
+#             print(f" Stopping attack...")
+
+#             storage.add_threat({
+#                 'file': file_path,
+#                 'reason': 'HONEYPOT_VIOLATION',
+#                 'risk': 'CRITICAL',
+#                 'score': 0.99,
+#                 'action': 'Attack stopped'
+#             })
+
+#             killed = killer.kill_by_file(file_path)
+#             print(f" Attack blocked! ({len(killed)} processes stopped)")
+#             alerts.send_alert('CRITICAL', f'Honeypot violated: {file_path}')
+#             print(f"{'=' * 50}\n")
+#             return
+
+#         # Scan the file
+#         print(f" Scanning file...")
+#         result = detector.scan_file(file_path)
+
+#         if result['threat']:
+#             print(f"  THREAT DETECTED!")
+#             print(f"   Type: {result['risk']}")
+#             print(f"   Reason: {result['reason']}")
+
+#             # Create backup
+#             backup_path = backup_manager.create_backup(file_path)
+#             print(f" Backup saved")
+
+#             # Save to database
+#             storage.add_threat({
+#                 'file': file_path,
+#                 'reason': result['reason'],
+#                 'risk': result['risk'],
+#                 'score': result['score'],
+#                 'backup': backup_path
+#             })
+
+#             # Stop the attack if critical
+#             if result['risk'] == 'CRITICAL':
+#                 killed = killer.kill_by_file(file_path)
+#                 print(f" Attacker stopped!")
+#                 alerts.send_alert('CRITICAL', f'Critical threat: {file_path}')
+#         else:
+#             print(f" Clean file")
+
+#         # Check for mass attack
+#         recent_changes.append({'file': file_path, 'time': time.time()})
+#         recent_changes = [c for c in recent_changes if time.time() - c['time'] < 60]
+
+#         if len(recent_changes) > 20:
+#             print(f"MASS ATTACK DETECTED! ({len(recent_changes)} files)")
+#             storage.add_threat({
+#                 'file': 'MULTIPLE_FILES',
+#                 'reason': 'MASS_ENCRYPTION_DETECTED',
+#                 'risk': 'CRITICAL',
+#                 'score': 0.98,
+#                 'count': len(recent_changes)
+#             })
+#             alerts.send_alert('CRITICAL', f'Mass attack: {len(recent_changes)} files')
+
+#         print(f"{'=' * 50}\n")
+
+#     except Exception as e:
+#         print(f" Error: {str(e)}")
+#         print(f"{'=' * 50}\n")
+
+
+
 def threat_callback(file_path):
     """Handle file change events"""
     global recent_changes
+    import os
+    import subprocess
 
     print(f"\n{'=' * 50}")
     print(f"📂 New File: {file_path}")
     print(f"{'=' * 50}")
 
     try:
-        # Check if it's a honeypot
-        if honeypot_manager.is_honeypot(file_path):
-            print(f"🍯 HONEYPOT TRAP TRIGGERED!")
-            print(f"⚡ Stopping attack...")
-
-            storage.add_threat({
-                'file': file_path,
-                'reason': 'HONEYPOT_VIOLATION',
-                'risk': 'CRITICAL',
-                'score': 0.99,
-                'action': 'Attack stopped'
-            })
-
-            killed = killer.kill_by_file(file_path)
-            print(f"✅ Attack blocked! ({len(killed)} processes stopped)")
-            alerts.send_alert('CRITICAL', f'Honeypot violated: {file_path}')
-            print(f"{'=' * 50}\n")
-            return
-
         # Scan the file
         print(f"🔍 Scanning file...")
         result = detector.scan_file(file_path)
@@ -78,10 +144,11 @@ def threat_callback(file_path):
             print(f"⚠️  THREAT DETECTED!")
             print(f"   Type: {result['risk']}")
             print(f"   Reason: {result['reason']}")
+            print(f"   Entropy: {result['score']:.4f}")
 
             # Create backup
             backup_path = backup_manager.create_backup(file_path)
-            print(f"💾 Backup saved")
+            print(f" Backup saved: {backup_path}")
 
             # Save to database
             storage.add_threat({
@@ -92,34 +159,69 @@ def threat_callback(file_path):
                 'backup': backup_path
             })
 
-            # Stop the attack if critical
+            # KILL MALWARE IF CRITICAL
             if result['risk'] == 'CRITICAL':
-                killed = killer.kill_by_file(file_path)
-                print(f"🛑 Attacker stopped!")
-                alerts.send_alert('CRITICAL', f'Critical threat: {file_path}')
+                print(f"\n CRITICAL THREAT - KILLING MALWARE PROCESS...")
+                
+                # Find malware.py process (NOT app.py)
+                killed = False
+                for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
+                    try:
+                        cmdline = proc.cmdline()
+                        # Kill only if it's running malware.py (not app.py)
+                        if 'malware.py' in ' '.join(cmdline):
+                            proc.kill()
+                            print(f"    KILLED: {proc.name()} (PID: {proc.pid})")
+                            print(f"   Command: {' '.join(cmdline)}")
+                            killed = True
+                    except:
+                        pass
+                
+                if killed:
+                    print(f" Malware process terminated!")
+                else:
+                    print(f"  No malware process found")
+                
+                alerts.send_alert('CRITICAL', f'Threat blocked + process killed: {file_path}')
         else:
-            print(f"✅ Clean file")
+            print(f" Clean file - No threat")
 
         # Check for mass attack
         recent_changes.append({'file': file_path, 'time': time.time()})
         recent_changes = [c for c in recent_changes if time.time() - c['time'] < 60]
 
         if len(recent_changes) > 20:
-            print(f"🚨 MASS ATTACK DETECTED! ({len(recent_changes)} files)")
+            print(f"\n MASS ATTACK DETECTED! ({len(recent_changes)} files in 60 seconds)")
+            print(f" KILLING ALL MALWARE PROCESSES...")
+            
+            killed_count = 0
+            for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
+                try:
+                    cmdline = proc.cmdline()
+                    if 'malware.py' in ' '.join(cmdline):
+                        proc.kill()
+                        killed_count += 1
+                        print(f"    KILLED: PID {proc.pid}")
+                except:
+                    pass
+            
             storage.add_threat({
                 'file': 'MULTIPLE_FILES',
                 'reason': 'MASS_ENCRYPTION_DETECTED',
                 'risk': 'CRITICAL',
                 'score': 0.98,
-                'count': len(recent_changes)
+                'count': len(recent_changes),
+                'processes_killed': killed_count
             })
-            alerts.send_alert('CRITICAL', f'Mass attack: {len(recent_changes)} files')
+            print(f" {killed_count} malware process(es) terminated!")
+            alerts.send_alert('CRITICAL', f'Mass attack blocked: {len(recent_changes)} files + {killed_count} processes killed')
 
         print(f"{'=' * 50}\n")
 
     except Exception as e:
-        print(f"❌ Error: {str(e)}")
+        print(f" Error: {str(e)}")
         print(f"{'=' * 50}\n")
+
 
 
 
@@ -210,10 +312,30 @@ async def get_threats(limit: int = 50):
     return storage.get_threats(limit)
 
 
+# @app.get("/api/stats")
+# async def get_stats():
+#     threats = storage.get_threats(100)
+#     backup_stats = backup_manager.get_stats()
+
+#     return {
+#         "total_threats": len(threats),
+#         "critical": sum(1 for t in threats if t['risk'] == 'CRITICAL'),
+#         "high": sum(1 for t in threats if t['risk'] == 'HIGH'),
+#         "monitoring": monitor.is_active(),
+#         "directories_monitored": len(monitor.get_monitored()),
+#         "honeypots_active": honeypot_manager.get_count(),
+#         "backups_created": backup_stats['count'],
+#         "backup_size_mb": backup_stats['size_mb'],
+#         "processes_killed": killer.get_kill_count()
+#     }
+
 @app.get("/api/stats")
 async def get_stats():
     threats = storage.get_threats(100)
     backup_stats = backup_manager.get_stats()
+    
+    
+    killed_count = sum(1 for t in threats if t['risk'] == 'CRITICAL')
 
     return {
         "total_threats": len(threats),
@@ -224,7 +346,7 @@ async def get_stats():
         "honeypots_active": honeypot_manager.get_count(),
         "backups_created": backup_stats['count'],
         "backup_size_mb": backup_stats['size_mb'],
-        "processes_killed": killer.get_kill_count()
+        "processes_killed": killed_count
     }
 
 
