@@ -1,0 +1,44 @@
+1
+
+PS D:\test_real_ransomware\target>
+
+# One at a time, press Enter after each:
+
+echo "Employee Data" > employees.txt
+
+echo "John Doe, Salary: 75000" >> employees.txt
+
+echo "Jane Smith, Salary: 65000" >> employees.txt
+
+echo "ID,Name,Salary" > data.csv
+
+echo "1,John,75000" >> data.csv
+
+echo "2,Jane,65000" >> data.csv
+
+
+2
+
+python malware.py "D:\test_real_ransomware\target"
+
+
+
+python test_honeypot.py D:\test_real_ransomware\target
+
+
+# CRITICAL threats (ransomware extensions)
+echo test > file1.encrypted
+echo test > file2.locked
+echo test > file3.crypto
+echo test > file4.wannacry
+
+# Clean files (should NOT detect)
+echo test > normal1.txt
+echo test > normal2.jpg
+echo test > normal3.pdf
+
+
+
+
+
+D:\test_real_ransomware\target
