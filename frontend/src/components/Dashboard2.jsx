@@ -1,4 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+// import HackerBackground from '../assets/hacker.webp';
+import HackerBackground from '../assets/v2.png';
+
 
 // Tailwind Colors for Hacker Theme:
 // BG: Dark Black/Circuit (inline style for complex background)
@@ -250,23 +253,22 @@ export default function RansomShieldDashboard() {
   }, [drawVisualization]);
 
   return (
-    // Outer container for the black/circuit background
     <div 
         className="min-h-screen p-5 font-sans"
         style={{
-            backgroundColor: '#0a0a0a',
-            backgroundImage: 'url(https://i.imgur.com/G09OQYg.png)', // A placeholder for a dark, green circuit board image
+            backgroundColor: '',
+            backgroundImage: `url(${HackerBackground})`, 
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
         }}
     >
-      <div className="max-w-[1400px] mx-auto bg-gray-900/90 border-2 border-green-800 backdrop-blur-sm rounded-xl p-8 shadow-2xl shadow-green-900/50">
+      <div className="max-w-[1400px] mx-auto bg-transparent border-2 border-green-800 rounded-xl px-8 shadow-2xl shadow-green-900/50">
         
         {/* Header */}
         <div className="text-center mb-10 pb-5 border-b-2 border-green-700">
-          <h1 className="text-5xl font-bold text-[#00ff41] mb-2 flex items-center justify-center gap-4 drop-shadow-[0_0_8px_rgba(0,255,65,0.7)]">
-            <span className="text-4xl">🛡️</span> RansomShield Pro
+          <h1 className="vt323-regular text-xl  lg:text-5xl backdrop-blur-4xl font-extrabold text-[#00ff41] mb-2 flex items-center justify-center gap-4 drop-shadow-[0_0_8px_rgba(0,255,65,0.7)]">
+            <span className="pt-1 text-xl lg:text-4xl backdrop-blur-4xl ">🛡️</span> RansomShield Pro
           </h1>
           <p className="text-green-500 text-lg font-mono tracking-wide">Advanced Multi-Layer Ransomware Detection & Response System</p>
           
@@ -281,10 +283,10 @@ export default function RansomShieldDashboard() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-10">
+        <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-10">
           <StatBox label="Total Threats" value={stats.total_threats} />
           <StatBox label="Critical Alerts" value={stats.critical} />
-          <StatBox label="Files Protected" value={stats.backups_created} /> {/* Used backups_created to match state name */}
+          <StatBox label="Files Protected" value={stats.backups_created} /> 
           <StatBox label="Honeypots Active" value={stats.honeypots_active} />
           <StatBox label="Processes Killed" value={stats.processes_killed} />
         </div>
