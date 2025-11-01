@@ -1,5 +1,5 @@
 import {} from "react";
-import RansomShieldDashboard from "./components/Dashboard.jsx";
+import RansomShieldDashboard from "./components/Dashboard2.jsx";
 import Footer from "./components/Footer.jsx"
 import "./App.css";
 
