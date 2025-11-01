@@ -235,7 +235,7 @@ export default function RansomShieldDashboard() {
           <div className={`inline-block px-5 py-2 rounded-full font-bold mt-3 ${
             systemActive ? 'bg-green-500 text-white' : 'bg-gray-500 text-white'
           }`}>
-            {systemActive ? '✅ Active Protection' : '⏸️ Monitoring Inactive'}
+            {systemActive ? '✅ Active Protection' : '⏸ Monitoring Inactive'}
           </div>
           
         </div>
@@ -268,21 +268,21 @@ export default function RansomShieldDashboard() {
               className="flex-1 min-w-[300px] px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#667eea] transition-colors"
             />
             <button onClick={startMonitoring} className="px-6 py-3 bg-[#667eea] text-white rounded-lg font-bold hover:bg-[#5568d3] hover:scale-105 transition-all">
-              🚀 Start Protection
+               Start Protection
             </button>
             <button onClick={stopMonitoring} className="px-6 py-3 bg-red-500 text-white rounded-lg font-bold hover:bg-red-600 transition-colors">
-              ⏹️ Stop
+               Stop
             </button>
           </div>
           <div className="flex flex-wrap gap-3">
             <button onClick={scanFile} className="px-6 py-3 bg-green-500 text-white rounded-lg font-bold hover:bg-green-600 transition-colors">
-              🔍 Scan File
+               Scan File
             </button>
             <button onClick={generateReport} className="px-6 py-3 bg-gray-600 text-white rounded-lg font-bold hover:bg-gray-700 transition-colors">
-              📊 Generate Report
+               Generate Report
             </button>
             <button onClick={refreshDashboard} className="px-6 py-3 bg-gray-600 text-white rounded-lg font-bold hover:bg-gray-700 transition-colors">
-              🔄 Refresh Now
+               Refresh Now
             </button>
           </div>
         </div>
@@ -322,10 +322,10 @@ export default function RansomShieldDashboard() {
                       {threat.backup && ' | Backup: ✅'}
                     </div>
                     <div className="text-xs font-mono text-gray-700 mt-1 break-all">
-                      📁 {threat.file}
+                       {threat.file}
                     </div>
                     <div className="text-xs text-gray-500 mt-1">
-                      ⏰ {new Date(threat.time).toLocaleString()}
+                      Time:  {new Date(threat.time).toLocaleString()}
                     </div>
                   </div>
                 ))
