@@ -2,14 +2,14 @@ export default function Footer() {
   return (
     <div>
       {/* Footer */}
-      <div className="mt-8 mx-10 pt-6 border-t-2 border-gray-200">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+      <div className="mt-8 mx-10 pt-6 pb-6  border-t-2 border-gray-200">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 ml-5 lg:ml-20 ">
           {/* Tech Stack */}
           <div>
             <h3 className="text-sm font-bold text-[#667eea] mb-3 flex items-center gap-2">
               ⚙️ Tech Stack
             </h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 lg:max-w-[300px]">
               {['Python', 'React', 'FastAPI', 'Machine Learning', 'WatchDog'].map((tech) => (
                 <span key={tech} className="px-3 py-1 bg-linear-to-r from-[#667eea] to-[#764ba2] text-white text-xs rounded-full font-semibold">
                   {tech}
@@ -65,7 +65,7 @@ export default function Footer() {
         </div>
 
         {/* Hackathon Badge */}
-        <div className="mt-4 text-center">
+        <div className="mt-4 text-center mb-5">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r from-yellow-400 to-orange-500 text-white rounded-full text-xs font-bold shadow-lg">
             🏆 Hackathon Project 2025
           </div>
